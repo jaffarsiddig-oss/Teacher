@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Teacher Intro Slide</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Nunito:wght@400;700&display=swap');
+        body { font-family: 'Nunito', sans-serif; display: flex; flex-direction: column; align-items: center; background: #fdf6ec; padding: 20px; }
+        .panel { background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 10px rgba(0,0,0,0.1); width: 400px; margin-bottom: 20px; text-align: center; }
+        input, textarea { width: 90%; margin: 10px 0; padding: 10px; border: 1px solid #ddd; border-radius: 5px; }
+        #slide { 
+            width: 1024px; height: 576px; position: relative; overflow: hidden; display: none;
+            background: url('https://img.freepik.com/free-vector/watercolor-back-school-background_23-2149450791.jpg') no-repeat center center;
+            background-size: cover; border: 10px solid white;
+        }
+        .text-box { position: absolute; left: 80px; top: 60px; width: 500px; text-align: left; }
+        .t-name { font-family: 'Great Vibes', cursive; font-size: 65px; color: #2c3e50; margin: 0; }
+        .t-exp { font-weight: bold; color: #ff7a59; font-size: 20px; border-bottom: 2px solid #ff7a59; display: inline-block; margin-bottom: 20px; }
+        .point { display: flex; align-items: center; margin-bottom: 15px; font-weight: bold; font-size: 18px; }
+        .icon { background: #ff7a59; color: white; width: 30px; height: 30px; border-radius: 5px; display: flex; align-items: center; justify-content: center; margin-right: 15px; }
+        .photo-area { position: absolute; right: 50px; bottom: 0; width: 400px; height: 500px; display: flex; align-items: flex-end; }
+        #dispImg { max-width: 100%; max-height: 100%; }
+    </style>
+</head>
+<body>
+    <div class="panel">
+        <h2>Teacher Intro Slide</h2>
+        <input type="file" id="photo" accept="image/*">
+        <input type="text" id="name" placeholder="Teacher Name">
+        <input type="text" id="exp" placeholder="Experience (e.g. 5+ Years)">
+        <textarea id="intro" placeholder="Intro sentence..."></textarea>
+        <button onclick="generate()" style="background:#ff7a59; color:white; padding:10px 20px; border:none; border-radius:5px; cursor:pointer;">Create Slide</button>
+    </div>
+    <div id="slide">
+        <div class="text-box">
+            <h1 id="outName" class="t-name"></h1>
+            <div id="outExp" class="t-exp"></div>
+            <p id="outIntro" style="font-size:22px; font-weight:600;"></p>
+            <div class="point"><div class="icon">✓</div>Specialize in foundational reading skills</div>
+            <div class="point"><div class="icon">✓</div>Interactive and engaging approach</div>
+            <div class="point"><div class="icon">✓</div>Creating confident young readers</div>
+        </div>
+        <div class="photo-area"><img id="dispImg"></div>
+    </div>
+    <script>
+        function generate() {
+            document.getElementById('outName').innerText = document.getElementById('name').value;
+            document.getElementById('outExp').innerText = "English Phonics Educator | " + document.getElementById('exp').value;
+            document.getElementById('outIntro').innerText = document.getElementById('intro').value;
+            const file = document.getElementById('photo').files[0];
+            const reader = new FileReader();
+            reader.onload = e => {
+                document.getElementById('dispImg').src = e.target.result;
+                document.getElementById('slide').style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    </script>
+</body>
+</html>
